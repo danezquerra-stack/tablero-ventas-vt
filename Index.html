@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Tablero Ventas VT Agosto2026",
+  "schemaVersion": 1,
+  "description": "RICETI · Local VT · Athletic — Tablero de ventas agosto 2026 sobre base ICG depurada. Corte al cierre del martes 4/8 (día 3 de 25). META 1.173 / OBJETIVO 1.267 / PREMIO 1.314, calculados sobre agosto 2025 depurado con escalones +8 % y +12 %. Semanas 7-6-6-6 días. Objetivo y Premio personal con piso 450/520 y día libre por unidades +10 % y UPT de agosto 2025.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RICETI · VT Athletic · Ventas Agosto 2026</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --surface:#ffffff; --ink:#0f172a; --ink2:#475569; --muted:#94a3b8;
+    --line:#e2e8f0; --track:#e7ecf1;
+    --actual:#16a34a; --actual-soft:#dcfce7; --meta:#64748b; --obj:#2563eb; --premio:#c026d3;
+    --bad:#dc2626; --good:#16a34a; --amber:#d97706;
+    --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06);
+  }
+  html[data-theme="dark"]{
+    --bg:#0b1220; --surface:#111a2b; --ink:#e8eef7; --ink2:#a9b6c9; --muted:#64748b;
+    --line:#22304a; --track:#1a2740;
+    --actual:#22c55e; --actual-soft:#0e2a1c; --meta:#7c8aa3; --obj:#60a5fa; --premio:#e879f9;
+    --bad:#f87171; --good:#34d399; --amber:#fbbf24;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:18px;}
+  .wrap{max-width:920px;margin:0 auto;}
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .brand{font-size:12px;letter-spacing:.14em;color:var(--ink2);font-weight:700;text-transform:uppercase;}
+  h1{margin:2px 0 0;font-size:26px;letter-spacing:-.01em;}
+  .sub{color:var(--ink2);font-size:13px;margin-top:3px;}
+  .datebadge{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px;box-shadow:var(--shadow);text-align:right;font-size:12px;color:var(--ink2);}
+  .datebadge b{display:block;color:var(--ink);font-size:15px;}
+  .theme{cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink2);border-radius:10px;padding:7px 10px;font-size:12px;margin-top:8px;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px;margin-bottom:16px;}
+  .card.primary{border:2px solid var(--obj);}
+  .hero-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .hero-num{font-size:40px;font-weight:800;letter-spacing:-.02em;}
+  .hero-num.wk{font-size:46px;}
+  .hero-num small{font-size:16px;color:var(--ink2);font-weight:600;}
+  .falta{font-size:14px;color:var(--ink2);}
+  .falta b{color:var(--ink);}
+  .status{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:#fee2e2;color:#b91c1c;}
+  html[data-theme="dark"] .status{background:#3b1616;color:#fca5a5;}
+  .status.ok{background:var(--actual-soft);color:var(--actual);}
+  .status.neu{background:#dbeafe;color:#1d4ed8;}
+  html[data-theme="dark"] .status.neu{background:#132a4d;color:#93c5fd;}
+  .track{position:relative;height:38px;border-radius:9px;margin:26px 0 8px;
+    background:linear-gradient(90deg,#dc2626 0%,#ef5350 18%,#f59e0b 40%,#eab308 55%,#84cc16 72%,#22c55e 86%,#15803d 100%);}
+  .track.big{height:46px;}
+  .veil{position:absolute;top:0;bottom:0;right:0;z-index:1;background:var(--track);border-left:3px solid var(--surface);border-radius:0 9px 9px 0;}
+  .mk{position:absolute;top:0;bottom:0;width:2px;z-index:2;background:rgba(15,23,42,.5);outline:1px solid rgba(255,255,255,.55);}
+  .mk.obj{background:rgba(15,23,42,.72)} .mk.premio{background:rgba(15,23,42,.9)}
+  .mk.end b{transform:translateX(-100%);}
+  .mk b.up{top:-32px;}
+  .mk b{position:absolute;top:-19px;transform:translateX(-50%);font-size:10px;font-weight:800;white-space:nowrap;color:var(--ink2);}
+  .proj{position:absolute;top:-4px;bottom:-4px;width:0;z-index:3;border-left:2px dashed var(--amber);}
+  .proj span{position:absolute;bottom:-17px;transform:translateX(-50%);font-size:10px;font-weight:800;white-space:nowrap;color:var(--amber);}
+  .sema-cap{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--ink2);margin:18px 0 0;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .sema-cap .pace{margin-left:auto;font-weight:700;color:var(--ink);}
+  .legendrow{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:10px;}
+  .legendrow i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle;}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink2);margin:2px 0 12px;}
+  h2.wk{color:var(--obj);}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px;}
+  .tile{background:var(--track);border:1px solid var(--line);border-radius:12px;padding:13px 14px;}
+  .tile.hi{background:linear-gradient(180deg,var(--actual-soft),var(--surface));border-color:var(--actual);}
+  .tk{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);font-weight:700;line-height:1.25;min-height:25px;}
+  .tv{font-size:33px;font-weight:800;letter-spacing:-.02em;margin:5px 0 3px;line-height:1;}
+  .tile.hi .tv{color:var(--actual);}
+  .ts,.cmp{font-size:11px;color:var(--ink2);}
+  .cmp{color:var(--muted);}
+  .cmp b{color:var(--ink);font-weight:700;}
+  .delta{font-size:14px;font-weight:800;vertical-align:middle;}
+  .delta.up{color:var(--good);} .delta.down{color:var(--bad);} .delta.flat{color:var(--muted);}
+  .palanca{margin-top:16px;border:1px solid var(--obj);border-radius:14px;overflow:hidden;}
+  .ph{background:var(--obj);color:#fff;font-weight:800;padding:9px 14px;font-size:14px;}
+  .pbody{padding:14px;font-size:15px;line-height:1.7;color:var(--ink);}
+  .scn{display:flex;flex-direction:column;gap:12px;margin-top:14px;}
+  .scnrow{background:var(--track);border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .scnrow.meta{border-left:4px solid var(--good)} .scnrow.obj{border-left:4px solid var(--obj)}
+  .scntop{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .scnbig{font-size:32px;font-weight:800;line-height:1;}
+  .scnrow.meta .scnbig{color:var(--good)} .scnrow.obj .scnbig{color:var(--obj)}
+  .scnof{font-size:13px;color:var(--ink2);font-weight:600;}
+  .scntag{margin-left:auto;color:#fff;font-weight:800;font-size:12px;padding:4px 11px;border-radius:999px;}
+  .scnbar{position:relative;height:12px;border-radius:6px;background:var(--surface);border:1px solid var(--line);overflow:hidden;margin:9px 0 7px;}
+  .scnbar span{display:block;height:100%;border-radius:6px;}
+  .scnnote{font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+  th,td{padding:9px 8px;text-align:center;font-size:14px;border-bottom:1px solid var(--line);}
+  th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  td.lbl,th.lbl{text-align:left;font-weight:700;white-space:nowrap;}
+  td.tot,th.tot{font-weight:800;background:linear-gradient(0deg,var(--track),transparent);}
+  th.cur,td.cur{background:rgba(37,99,235,.08);}
+  tr.meta td{color:var(--ink2);}
+  tr.actual td{background:var(--actual-soft);}
+  tr.actual td.lbl{color:var(--actual);}
+  .av{font-size:16px;font-weight:800;color:var(--actual);}
+  .wkbar{height:7px;border-radius:4px;background:var(--track);margin:7px 0 4px;overflow:hidden;}
+  .wkbar span{display:block;height:100%;border-radius:4px;background:var(--amber);}
+  .wkbar.red span{background:var(--bad);}
+  .wkbar.amber span{background:var(--amber);}
+  .wkbar.green span{background:var(--good);}
+  .wkbar.blue span{background:var(--obj);}
+  .wkd{font-size:10.5px;font-weight:700;line-height:1;}
+  .wkd.red{color:var(--bad);} .wkd.amber{color:var(--amber);} .wkd.green{color:var(--good);} .wkd.blue{color:var(--obj);} .wkd.pend{color:var(--muted);}
+  .acu{font-weight:700;font-size:13px;}
+  .neg{color:var(--bad);} .pos{color:var(--good);}
+  tr.obj td.v{color:var(--obj);font-weight:700;}
+  tr.premio td.v{color:var(--premio);font-weight:700;}
+  tr.desafio td.v{color:var(--amber);font-weight:800;}
+  .pctrow td{color:var(--muted);font-size:12px;font-weight:700;border-bottom:none;}
+  .diaLibre{display:inline-block;background:var(--obj);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.06em;vertical-align:middle;margin-right:6px;}
+  .note{font-size:12px;color:var(--ink2);margin-top:12px;line-height:1.5;}
+  .foot{font-size:11px;color:var(--muted);text-align:center;margin-top:8px;}
+  .pisohdr{background:var(--track);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12.5px;color:var(--ink2);margin-bottom:12px;}
+  .pisohdr b{color:var(--ink);}
+  .vcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+  .vhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .vname{font-weight:800;font-size:15px;flex:1;min-width:110px;}
+  .vunits{font-size:22px;font-weight:800;}
+  .vunits small{font-size:12px;color:var(--ink2);font-weight:600;}
+  .formtag{font-size:11px;font-weight:700;color:var(--ink2);background:var(--track);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
+  .vbar{position:relative;height:13px;border-radius:6px;background:var(--track);border:1px solid var(--line);margin:22px 0 6px;overflow:visible;}
+  .vbar>span{display:block;height:100%;border-radius:6px;background:var(--actual);}
+  .vbar>span.vg{background:var(--good);} .vbar>span.va{background:var(--amber);} .vbar>span.vr{background:var(--bad);}
+  .vmk{position:absolute;top:-3px;bottom:-3px;width:2px;background:rgba(15,23,42,.6);outline:1px solid rgba(255,255,255,.5);z-index:2;}
+  html[data-theme="dark"] .vmk{background:rgba(232,238,247,.65);}
+  .vmk.obj{background:var(--obj);width:3px;outline:1px solid rgba(255,255,255,.45);}
+  .vmk.premio{background:var(--premio);width:3px;outline:1px solid rgba(255,255,255,.45);}
+  .vmk.exp{background:transparent;outline:none;border-left:2px dashed var(--amber);width:0;z-index:3;}
+  .vmk b{position:absolute;top:-16px;transform:translateX(-50%);font-size:9px;font-weight:800;white-space:nowrap;color:var(--ink2);letter-spacing:.02em;}
+  .vmk.exp b{color:var(--amber);}
+.vmk.end b{transform:translateX(-100%);}
+  .vel{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .vel.vg{background:var(--actual-soft);color:var(--actual);}
+  .vel.va{background:#fef3c7;color:#b45309;}
+  html[data-theme="dark"] .vel.va{background:#3a2e12;color:#fbbf24;}
+  .vel.vr{background:#fee2e2;color:#b91c1c;}
+  html[data-theme="dark"] .vel.vr{background:#3b1616;color:#fca5a5;}
+  .vel.vn{background:#dbeafe;color:#1d4ed8;}
+  html[data-theme="dark"] .vel.vn{background:#132a4d;color:#93c5fd;}
+  .vpace{font-size:11.5px;color:var(--ink2);margin-top:2px;}
+  .vpace b{color:var(--ink);}
+  .vsub{font-size:11px;color:var(--ink2);}
+  .vconds{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;}
+  .vc{font-size:11.5px;background:var(--track);border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--ink2);}
+  .vc b{color:var(--ink);font-weight:700;}
+  .ok2{color:var(--good);font-weight:800;} .no2{color:var(--bad);font-weight:800;}
+  .dlbadge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .dlbadge.no{background:#fee2e2;color:#b91c1c;}
+  html[data-theme="dark"] .dlbadge.no{background:#3b1616;color:#fca5a5;}
+  .dlbadge.yes{background:var(--actual-soft);color:var(--actual);}
+  .dlbox{border-radius:8px;padding:4px 10px;font-size:11.5px;font-weight:800;display:inline-flex;align-items:center;gap:5px;line-height:1.3;}
+  .dlbox.yes{background:var(--actual-soft);color:var(--actual);border:1px solid var(--good);}
+  .dlbox.half{background:#fef3c7;color:#b45309;border:1px solid var(--amber);}
+  html[data-theme="dark"] .dlbox.half{background:#3a2e12;color:#fbbf24;}
+  .dlbox.no{background:#fee2e2;color:#b91c1c;border:1px solid var(--bad);}
+  html[data-theme="dark"] .dlbox.no{background:#3b1616;color:#fca5a5;}
+  .dlbox.neu{background:#dbeafe;color:#1d4ed8;border:1px solid var(--obj);}
+  html[data-theme="dark"] .dlbox.neu{background:#132a4d;color:#93c5fd;}
+  @media(max-width:640px){
+    body{padding:10px} .hero-num{font-size:32px} .hero-num.wk{font-size:38px} th,td{padding:7px 4px;font-size:13px}
+    .tiles{grid-template-columns:repeat(2,1fr)} .tv{font-size:30px}
+    .scn .scnbig{font-size:28px} .pbody{font-size:14px} h1{font-size:22px}
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="brand">RICETI &middot; Local VT &middot; Athletic</div>
+      <h1>Ventas &mdash; Agosto 2026</h1>
+      <div class="sub">Seguimiento del equipo &middot; semanas de lunes a s&aacute;bado &middot; unidades vendidas</div>
+      <button class="theme" onclick="var h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';">&#9689; Tema</button>
+    </div>
+    <div class="datebadge">Actualizado al cierre de<b>martes 4/8</b>d&iacute;a 3 de 25 d&iacute;as de venta</div>
+  </header>
+<div class="card primary"><h2 class="wk">&#9673; Objetivo de la semana &middot; SEM 1 (s&aacute;b 1 al s&aacute;b 8) &middot; 7 d&iacute;as</h2><div class="hero-top"><div class="hero-num wk">108 <small>/ meta de la semana 422 unid.</small></div><div class="falta"><span class="status neu">Faltan 314</span> &nbsp; Athletic sostuvo el nivel: 43 y 41</div></div><div class="track big"><div class="mk premio end" style="left:calc(100% - 2px)"><b>meta de la semana 422</b></div><div class="veil" style="left:25.6%;width:74.4%"></div></div><div class="sema-cap"><span><i class="dot" style="background:#dc2626"></i>lejos</span><span><i class="dot" style="background:#eab308"></i>en camino</span><span><i class="dot" style="background:#16a34a"></i>cerca</span><span class="pace">&#128293; 78 por d&iacute;a en los 4 d&iacute;as que quedan</span></div><div class="legendrow"><span>Cerraron <b>3 de los 7 d&iacute;as</b> de la semana (s&aacute;b 1, lun 3 y mar 4) &middot; quedan mi&eacute; 5 a s&aacute;b 8 &middot; agosto 2025, semana 1: 422 unidades &middot; 112 el viernes 1 &middot; 72 el s&aacute;bado 9</span></div></div>
+<div class="card"><h2>Escala mensual &middot; Agosto 2026 &middot; 25 d&iacute;as de venta</h2><div class="hero-top"><div class="hero-num">108 <small>/ meta 1.173 unid.</small></div><div class="falta"><span class="status neu">&#128640; Falta ritmo, pero el nivel bueno ya se sostiene</span> &nbsp; d&iacute;a <b>3</b> de <b>25</b> &middot; el foco del mes es <b>pasar los días de 43</b></div></div><div class="track big"><div class="mk" style="left:89.3%"><b>META</b></div><div class="mk obj" style="left:96.4%"><b class="up">OBJ</b></div><div class="mk premio end" style="left:calc(100% - 2px)"><b>PREMIO</b></div><div class="veil" style="left:8.2%;width:91.8%"></div></div><div class="sema-cap"><span><i class="dot" style="background:#dc2626"></i>lejos</span><span><i class="dot" style="background:#eab308"></i>en camino</span><span><i class="dot" style="background:#16a34a"></i>cerca de la meta</span><span class="pace">META = 47 por d&iacute;a</span></div><div class="legendrow"><span><i style="background:#22c55e"></i>Vendido <b style="color:var(--ink)">108</b></span><span><i style="background:var(--meta)"></i>META <b style="color:var(--ink)">1.173</b></span><span><i style="background:var(--obj)"></i>OBJETIVO <b style="color:var(--ink)">1.267</b></span><span><i style="background:var(--premio)"></i>PREMIO <b style="color:var(--ink)">1.314</b></span></div><div class="note">Van <b>108 unidades en 3 d&iacute;as</b>: <b>36 por d&iacute;a</b>, y la <b>META 1.173</b> pide <b>47</b>. Falta, y conviene decirlo ahora que reci&eacute;n empieza. Pero mir&aacute; el detalle: despu&eacute;s del s&aacute;bado de 24 vinieron <b>43 y 41</b> &mdash; <b>el local ya encontr&oacute; el nivel y lo est&aacute; sosteniendo</b>. Subiendo esos d&iacute;as unas pocas unidades m&aacute;s estamos en la l&iacute;nea de la META, y quedan <b>22 d&iacute;as</b> para recuperar. Agosto 2025 fue el mejor mes del a&ntilde;o en Athletic: <b>el mes da para pelearlo entero</b>.</div></div>
+<div class="card"><h2>N&uacute;meros para arrancar el mes</h2><div class="tiles"><div class="tile"><div class="tk">D&iacute;as de venta del mes</div><div class="tv">25</div><div class="cmp">s&aacute;b 1 a lun 31 &middot; dom cerrados &middot; <b>mar 25 feriado</b></div></div><div class="tile hi"><div class="tk">Unidades/d&iacute;a para el OBJETIVO</div><div class="tv">51</div><div class="cmp">META <b>47</b> &middot; PREMIO <b>53</b></div></div><div class="tile"><div class="tk">Ritmo de referencia</div><div class="tv">47</div><div class="cmp">unid./d&iacute;a en ago-25 &middot; julio 2026 <b>33</b></div></div><div class="tile"><div class="tk">Tickets por d&iacute;a</div><div class="tv">26</div><div class="cmp">ago-25 &middot; 12 meses <b>25</b></div></div><div class="tile"><div class="tk">UPT &middot; pares por ticket</div><div class="tv">1,70</div><div class="cmp">ago-25 &middot; 12 meses <b>1,60</b></div></div></div><div class="palanca"><div class="ph">La palanca del mes: el segundo par &#128165;</div><div class="pbody">En agosto van a entrar al local unos <b>659 tickets</b> (~26 por d&iacute;a). Esa gente <b>entra igual</b>: no hay que salir a buscarla. En agosto del a&ntilde;o pasado VT cerr&oacute; con <b>1,70 pares por ticket</b>. <b>Un par m&aacute;s cada 10 ventas</b> &mdash; una de cada diez &mdash; son <b>66 unidades en el mes</b>, sin un solo cliente nuevo: es como <b>regalarle al local casi 1 d&iacute;as de venta</b>.<div class="scn"><div class="scnrow meta"><div class="scntop"><span class="scnbig">47</span><span class="scnof">unidades por d&iacute;a entre todos para la META</span><span class="scntag" style="background:var(--good)">&#127919; META 1.173</span></div><div class="scnbar"><span style="width:89%;background:var(--good)"></span></div><div class="scnnote">Van <b>108 unidades en 3 d&iacute;as</b>: <b>36 por d&iacute;a</b>, y la <b>META 1.173</b> pide <b>47</b>.</div></div><div class="scnrow obj"><div class="scntop"><span class="scnbig">+66</span><span class="scnof">unidades solo por subir un par cada 10 ventas</span><span class="scntag" style="background:var(--obj)">&#128165; EL SEGUNDO PAR</span></div><div class="scnbar"><span style="width:23%;background:var(--obj)"></span></div><div class="scnnote">Es el camino m&aacute;s corto que hay: <b>no depende de que entre m&aacute;s gente</b>, depende de ofrecer. Y en la <b>primera semana</b>, que es la m&aacute;s cargada del mes, es donde m&aacute;s rinde.</div></div></div></div></div></div>
+<div class="card"><h2><span class="diaLibre">D&Iacute;A LIBRE</span> Objetivo y Premio del grupo (por semana)</h2><table><thead><tr><th class="lbl"></th><th class="cur">SEM 1</th><th>SEM 2</th><th>SEM 3</th><th>SEM 4</th><th class="tot">TOTAL</th></tr></thead><tbody><tr class="meta"><td class="lbl">META</td><td class="cur">422</td><td>316</td><td>260</td><td>175</td><td class="tot">1.173</td></tr><tr class="obj"><td class="lbl">OBJETIVO</td><td class="v cur">456</td><td class="v">341</td><td class="v">281</td><td class="v">189</td><td class="tot">1.267</td></tr><tr class="premio"><td class="lbl">PREMIO</td><td class="v cur">473</td><td class="v">354</td><td class="v">291</td><td class="v">196</td><td class="tot">1.314</td></tr><tr class="pctrow"><td class="lbl">d&iacute;as de venta</td><td class="cur">7</td><td>6</td><td>6</td><td>6</td><td class="tot">25</td></tr></tbody></table><div class="note"><b>El D&Iacute;A LIBRE del grupo se gana llegando al OBJETIVO</b> (<span style="color:var(--obj)">1.267 unidades</span>) del mes. El <b style="color:var(--premio)">PREMIO</b> (1.314 unidades) es la meta m&aacute;xima del equipo. El <b>reparto semanal</b> es el reparto real de agosto 2025, que tiene <b>exactamente los mismos 25 d&iacute;as de venta y las mismas semanas de 7-6-6-6 d&iacute;as</b> que agosto 2026: la comparaci&oacute;n es semana contra semana, sin ajustes. La <b>SEM 1 tiene 7 d&iacute;as</b> (s&aacute;b 1 m&aacute;s lun 3 a s&aacute;b 8) y la <b>SEM 4 no tiene el martes 25</b>, que es feriado (Declaratoria de la Independencia).</div></div>
+<div class="card"><h2>Seguimiento por semana</h2><table><thead><tr><th class="lbl"></th><th class="cur">SEM 1<br><small style="font-weight:500;color:var(--obj)">1&ndash;8 &middot; en curso</small></th><th>SEM 2<br><small style="font-weight:500;color:var(--muted)">10&ndash;15</small></th><th>SEM 3<br><small style="font-weight:500;color:var(--muted)">17&ndash;22</small></th><th>SEM 4<br><small style="font-weight:500;color:var(--muted)">24&ndash;31</small></th><th class="tot">TOTAL</th></tr></thead><tbody><tr class="meta"><td class="lbl">META</td><td class="cur">422</td><td>316</td><td>260</td><td>175</td><td class="tot">1.173</td></tr><tr class="actual"><td class="lbl">ACTUAL</td><td class="cur"><div class="av">108</div><div class="wkbar amber"><span style="width:25.6%"></span></div><div class="wkd amber">en curso &middot; 3 de 7 d&iacute;as</div></td><td><div class="av" style="color:var(--muted)">&mdash;</div><div class="wkbar"><span style="width:0%"></span></div><div class="wkd pend">por jugar</div></td><td><div class="av" style="color:var(--muted)">&mdash;</div><div class="wkbar"><span style="width:0%"></span></div><div class="wkd pend">por jugar</div></td><td><div class="av" style="color:var(--muted)">&mdash;</div><div class="wkbar"><span style="width:0%"></span></div><div class="wkd pend">por jugar</div></td><td class="tot">108</td></tr></tbody></table><div class="note">Se va cargando al cerrar cada d&iacute;a. La <b>META</b> es la venta de agosto 2025 repartida por semana. La <b>SEM 1</b> lleva <b>3 de sus 7 d&iacute;as</b> jugados (s&aacute;b 1, lun 3 y mar 4).</div></div>
+<div class="card"><h2>Por funcionario &middot; Objetivo y Premio personal &middot; al 4 de agosto</h2><div class="pisohdr">Piso del local, igual para todos: <b>OBJETIVO 450</b> &rarr; <b>PREMIO 520</b> unidades en el mes. El <b>d&iacute;a libre personal</b> se gana con dos condiciones juntas: superar <b>tu agosto 2025 +10%</b> en unidades <b>y</b> sostener tu <b>UPT</b> (pares por ticket &ge; tu UPT de <b>agosto 2025</b>).</div><div class="pisohdr">&#128197; <b>D&iacute;a 2 de 25.</b> Cada ficha muestra tu n&uacute;mero a batir, <b>d&oacute;nde ir&iacute;as a esta altura del mes</b> si fueras en l&iacute;nea recta, y cu&aacute;nto te falta por d&iacute;a en los <b>23 d&iacute;as</b> que quedan. Con dos d&iacute;as jugados el sem&aacute;foro <b>se mueve much&iacute;simo</b>: un solo buen d&iacute;a te cambia el color. Es para orientarse, <b>no para preocuparse</b>.</div><div class="vcard"><div class="vhead"><div class="vname">Marcia Lorenzo</div><div class="vel va">&#9203; Cerca del ritmo</div><div class="vunits">66 <small>unid.</small></div></div><div class="vbar"><span style="width:10.6%"></span><div class="vmk obj" style="left:72.3%"><b>OBJ 450</b></div><div class="vmk premio" style="left:83.6%"><b>PREMIO 520</b></div></div><div class="vsub"><span style="color:var(--obj);font-weight:700">Objetivo 450</span> &rarr; <b>18,0 por d&iacute;a</b> en 25 d&iacute;as &middot; <span style="color:var(--premio);font-weight:700">Premio 520</span></div><div class="vpace" style="margin-top:6px"><b>63 en VT</b> m&aacute;s <b>3 de apoyo en VA</b> &middot; tu n&uacute;mero personal se mide sobre el <b>total</b></div><div class="vpace" style="margin-top:6px">A esta altura del mes (<b>d&iacute;a 3 de 25</b>) ir&iacute;as en <b>75</b> y vas en <b>66</b> &middot; te faltan <b>556</b> para tu n&uacute;mero del d&iacute;a libre: <b>25,3 por d&iacute;a</b> en los 22 d&iacute;as que quedan</div><div class="vpace" style="margin-top:6px">En julio cerraste <b>394 unidades</b> &middot; tu agosto 2025: <b>565 unidades en 25 d&iacute;as</b>, UPT <b>1,700</b></div><div class="vconds"><span class="vc">Unidades +10% (d&iacute;a libre): <b>622</b> &rarr; 24,9 por d&iacute;a</span><span class="vc">UPT &ge; ago-25: <b>1,700</b></span><span class="dlbox neu">&#127919; D&iacute;a libre personal: <b>las 2 condiciones juntas</b></span></div><div class="vpace" style="margin-top:9px">&#128161; Agosto pasado fue tu <b>mejor mes del año: 565 unidades con UPT 1,700</b>. Son las dos varas más altas de Athletic, así que este mes es <b>tu mes</b>. El <b>Objetivo del local 450</b> lo tenés a tiro con tu ritmo (18 por día en julio). Y ojo con la UPT: en julio hiciste 1,27 contra 1,70 del año pasado &mdash; <b>ahí está tu mayor palanca</b>, son 4 pares más cada 10 ventas.</div></div><div class="vcard"><div class="vhead"><div class="vname">Bruno Alfaro</div><div class="vel va">&#9203; Cerca del ritmo</div><div class="vunits">45 <small>unid.</small></div></div><div class="vbar"><span style="width:8.7%"></span><div class="vmk obj" style="left:86.5%"><b>OBJ 450</b></div><div class="vmk premio end" style="left:100.0%"><b>PREMIO 520</b></div></div><div class="vsub"><span style="color:var(--obj);font-weight:700">Objetivo 450</span> &rarr; <b>18,0 por d&iacute;a</b> en 25 d&iacute;as &middot; <span style="color:var(--premio);font-weight:700">Premio 520</span></div><div class="vpace" style="margin-top:6px">A esta altura del mes (<b>d&iacute;a 3 de 25</b>) ir&iacute;as en <b>54</b> y vas en <b>45</b> &middot; te faltan <b>408</b> para tu n&uacute;mero del d&iacute;a libre: <b>18,5 por d&iacute;a</b> en los 22 d&iacute;as que quedan</div><div class="vpace" style="margin-top:6px">En julio cerraste <b>300 unidades</b> &middot; tu agosto 2025: <b>412 unidades en 22 d&iacute;as</b>, UPT <b>1,653</b></div><div class="vconds"><span class="vc">Unidades +10% (d&iacute;a libre): <b>453</b> &rarr; 18,1 por d&iacute;a</span><span class="vc">UPT &ge; ago-25: <b>1,653</b></span><span class="dlbox neu">&#127919; D&iacute;a libre personal: <b>las 2 condiciones juntas</b></span></div><div class="vpace" style="margin-top:9px">&#128161; Tu agosto pasado fue <b>412 unidades en 22 días</b>, o sea <b>19 por día</b> &mdash; el mejor ritmo del local. El <b>+10 % son 453</b>, y con el mes completo (25 días) da. La UPT a batir es <b>1,653</b>, también la más alta de VT: sos el que mejor coloca el segundo par. <b>La primera semana vale 422 para el local y vos sos el que más la mueve.</b></div></div><div class="vcard"><div class="vhead"><div class="vname">Pablo García</div><div class="formtag">Venta eventual &middot; ventas especiales</div><div class="vunits">0 <small>unid.</small></div></div><div class="vpace" style="margin-top:8px">Su volumen no es comparable con una jornada de piso completa y buena parte de lo que hace son <b>ventas especiales</b>, que distorsionan el cálculo del UPT. Por eso <b>no entra en el esquema de Objetivo y Premio personal</b> &mdash; sí en el <b>día libre del grupo</b>. Sus unidades <b>suman completas al objetivo del local</b>: en julio aportó <b>137</b>.</div></div><div class="note">El local lleva <b>108 unidades</b>, que son las que se hicieron ac&aacute;. En las fichas ves <b>111</b> porque <b>Marcia</b> adem&aacute;s hizo <b>3 de apoyo en VA</b>: esas 3 suman al objetivo de VA (es donde se vendieron) y a <b>su n&uacute;mero personal</b>, que se mide sobre su venta total.</div></div>
+<div class="foot">RICETI SA &middot; Local VT &middot; Athletic &middot; Datos ICG (G001) &middot; semanas lunes&ndash;s&aacute;bado &middot; Agosto 2026: <b>25 d&iacute;as de venta</b> (domingos cerrados, feriado martes 25 &mdash; Declaratoria de la Independencia) &middot; Corte al cierre del <b>martes 4/8</b> (d&iacute;a 3 de 25)<br><b>Solo ventas efectivas a clientes:</b> quedan afuera los albaranes de traspaso entre locales, las cuentas de la empresa y de la familia, y las l&iacute;neas que no son mercader&iacute;a (alquileres, comisiones de tarjeta, diferencias de cambio, descuentos comerciales). Las unidades gratis del 4&times;3 cuentan en unidades pero no en el UPT. Top-10 de clientes revisado en importe y en unidades, y toda venta de 5 o m&aacute;s unidades en un mismo ticket se revisa una por una cada semana.</div>
+</div>
+</body>
+</html>
